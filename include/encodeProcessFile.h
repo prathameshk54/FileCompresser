@@ -2,7 +2,7 @@
 #define ENCODE_PROCESS_FILE_H
 
 typedef struct charMap {
-	u8_t character[MAX_DISTINCT_CHAR];
+	/* u8_t character[MAX_DISTINCT_CHAR]; */
 	int count[MAX_DISTINCT_CHAR];
 } charMap_t;
 
@@ -16,15 +16,18 @@ EXTERN charMap_t charMap;
 
 #ifdef ENCODER_MAIN_C
 /**
- *  @desc initializes the character-probability map before reading the file
+ *  @desc	initializes the character-probability map before reading the file
+ *  @input
+ *  @output
+ *  @note
  */
 void initCharMap();
 
 /**
- * @desc reads the file, and calculates the probabilities of all the unique characters in it
- * @input (FILE *fp) file pointer of file to be encoded
- * @output (u8_t) returns 0 if success
- * 			  1 if failed
+ * @desc	reads the file, and calculates the probabilities of all the unique characters in it
+ * @input	(FILE *fp) file pointer of file to be encoded, file is assumed to be already opened
+ * @output	(u8_t) returns 0 if success, non zero if failed
+ * @note	file is already opened successfully and fp is valid
  */
 u8_t processFile(FILE *fp);
 #endif
