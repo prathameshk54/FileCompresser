@@ -1,11 +1,11 @@
 #define ENCODE_PROCESS_FILE_C
 
-#include<stdlib.h>
-#include<fcntl.h>
-#include<errno.h>
-#include<sys/types.h>
-#include<sys/stat.h>
-#include<unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include "common.h"
 #include "encodeProcessFile.h"
 
@@ -18,7 +18,8 @@
 void initCharMap() {
 	int i;
 	for (i = 0; i < MAX_DISTINCT_CHAR; i++) {
-		charMap.count[i] = 0;
+		charMap[i].character = (u8_t)i;
+		charMap[i].count = 0;
 	}
 }
 
@@ -26,7 +27,8 @@ void initCharMap() {
  * @desc	reads the file, and calculates the probabilities of all the unique characters in it
  * @input	(FILE *fp) file pointer of file to be encoded, file is assumed to be already opened
  * @output	(u8_t) returns 0 if success, non zero value if failed
- * @note	file is already opened successfully and fp is valid
+ * @note	file should already be opened successfully with valid fp
+ * 		every character is assumed to be present at its index
  * 		processes file from the given position of fp
  */
 u8_t processFile(FILE *fp) {
@@ -37,7 +39,7 @@ u8_t processFile(FILE *fp) {
 		if (res <= 0) {
 			break;
 		} else {
-			charMap.count[c]++;
+			charMap[c].count++;
 		}
 	}
 	return res;

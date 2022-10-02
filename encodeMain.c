@@ -1,4 +1,4 @@
-#define ENCODE_PROCESS_FILE_C
+#define ENCODER_MAIN_C
 
 #include <stdlib.h>
 #include<fcntl.h>
@@ -41,4 +41,4 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-#undef ENCODE_PROCESS_FILE_C
+#undef ENCODER_MAIN_C
